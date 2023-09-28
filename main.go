@@ -1,22 +1,37 @@
 package main
 
 import (
-	"log"
+	"database/sql"
 
 	"github.com/Bek0sh/soft-ass1/pkg/db"
-	"github.com/Bek0sh/soft-ass1/pkg/models"
+	"github.com/Bek0sh/soft-ass1/pkg/employee"
 )
 
-func init() {
-	cache := &db.Cashe{}
+var pDB *sql.DB
 
-	data := db.NewDbConn(cache)
+func init() {
+	postgres := &db.Postgres{
+		User:     "postgres",
+		Password: "1234",
+		Database: "todoauth",
+	}
+
+	data := db.NewDbConn(postgres)
 	data.Con.Connect()
-	database := data.GetCashe()
-	database.M[1] = models.Employee{Name: "Beka"}
-	log.Print(database.M[1].Name)
+	pDB = data.GetPostgre()
 }
 
 func main() {
+	emp := &employee.Employee{}
+	jun := &employee.Junior{Helper: emp}
+	mid := &employee.Middle{Helper: &employee.Junior{Helper: emp}}
+
+	dev := employee.EmpBehabior{IE: emp}
+	dev1 := employee.EmpBehabior{IE: jun}
+	dev2 := employee.EmpBehabior{IE: mid}
+
+	dev.DisplayInfo()
+	dev1.DisplayInfo()
+	dev2.DisplayInfo()
 
 }

@@ -6,6 +6,7 @@ import (
 	"log"
 
 	"github.com/Bek0sh/soft-ass1/pkg/db/idb"
+	"github.com/Bek0sh/soft-ass1/pkg/employee"
 )
 
 type DbConnection struct {
@@ -13,6 +14,7 @@ type DbConnection struct {
 }
 
 var data *sql.DB
+var mapa map[int]employee.Employee
 
 func NewDbConn(con idb.IDatabase) *DbConnection {
 	return &DbConnection{Con: con}
@@ -22,6 +24,9 @@ type Postgres struct {
 	User     string
 	Password string
 	Database string
+}
+
+type Cache struct {
 }
 
 func (p *Postgres) Connect() {
@@ -34,6 +39,14 @@ func (p *Postgres) Connect() {
 	data = db
 }
 
-func (db *DbConnection) GetDb() *sql.DB {
+func (c *Cache) Connect() {
+	mapa = make(map[int]employee.Employee)
+}
+
+func (db *DbConnection) GetPostgre() *sql.DB {
 	return data
+}
+
+func (db *DbConnection) GetCache() map[int]employee.Employee {
+	return mapa
 }
