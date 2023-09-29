@@ -4,6 +4,8 @@ import (
 	"log"
 )
 
+var Number int
+
 type Employee struct {
 }
 

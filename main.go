@@ -3,22 +3,32 @@ package main
 import (
 	"database/sql"
 
+	"github.com/Bek0sh/soft-ass1/pkg/config"
 	"github.com/Bek0sh/soft-ass1/pkg/db"
 	"github.com/Bek0sh/soft-ass1/pkg/employee"
 )
 
 var pDB *sql.DB
+var mapa map[int]employee.Employee
 
 func init() {
+	cfg := config.GetConfig()
 	postgres := &db.Postgres{
-		User:     "postgres",
-		Password: "1234",
-		Database: "todoauth",
+		User:     cfg.Postgre.DbUsername,
+		Password: cfg.Postgre.DbPassword,
+		Database: cfg.Postgre.DbName,
 	}
 
+	cache := &db.Cache{}
+
 	data := db.NewDbConn(postgres)
+	cacheData := db.NewDbConn(cache)
+
 	data.Con.Connect()
+	cacheData.Con.Connect()
+
 	pDB = data.GetPostgre()
+	mapa = cacheData.GetCache()
 }
 
 func main() {

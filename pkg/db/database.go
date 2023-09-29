@@ -14,6 +14,7 @@ type DbConnection struct {
 }
 
 var data *sql.DB
+
 var mapa map[int]employee.Employee
 
 func NewDbConn(con idb.IDatabase) *DbConnection {
