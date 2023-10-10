@@ -49,9 +49,9 @@ func main() {
 			},
 		},
 	}
-	dev1 := employee.EmpBehabior{IE: jun}
-	dev2 := employee.EmpBehabior{IE: mid}
-	dev3 := employee.EmpBehabior{IE: senior}
+	dev1 := employee.EmpDecorater{IE: jun}
+	dev2 := employee.EmpDecorater{IE: mid}
+	dev3 := employee.EmpDecorater{IE: senior}
 
 	dev1.DisplayInfo()
 	dev2.DisplayInfo()

@@ -6,7 +6,7 @@ type IEmp interface {
 	Info()
 }
 
-type EmpBehabior struct {
+type EmpDecorater struct {
 	IE IEmp
 }
 
