@@ -2,7 +2,10 @@ module github.com/Bek0sh/soft-ass1
 
 go 1.20
 
-require github.com/ilyakaznacheev/cleanenv v1.5.0
+require (
+	github.com/ilyakaznacheev/cleanenv v1.5.0
+	github.com/lib/pq v1.10.9
+)
 
 require (
 	github.com/BurntSushi/toml v1.2.1 // indirect

@@ -7,6 +7,8 @@ import (
 var Number int
 
 type Employee struct {
+	Name string
+	Surname string
 }
 
 func (e *Employee) Expirience() int {

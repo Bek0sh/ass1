@@ -13,6 +13,7 @@ var mapa map[int]employee.Employee
 
 func init() {
 	cfg := config.GetConfig()
+
 	postgres := &db.Postgres{
 		User:     cfg.Postgre.DbUsername,
 		Password: cfg.Postgre.DbPassword,
@@ -32,16 +33,28 @@ func init() {
 }
 
 func main() {
-	emp := &employee.Employee{}
-	jun := &employee.Junior{Helper: emp}
-	mid := &employee.Middle{Helper: &employee.Junior{Helper: emp}}
 
-	dev := employee.EmpBehabior{IE: emp}
+	jun := &employee.Junior{
+		Helper: &employee.Employee{},
+	}
+	mid := &employee.Middle{
+		Helper: &employee.Junior{
+			Helper: &employee.Employee{},
+		},
+	}
+	senior := &employee.Senior{
+		Helper: &employee.Middle{
+			Helper: &employee.Junior{
+				Helper: &employee.Employee{},
+			},
+		},
+	}
 	dev1 := employee.EmpBehabior{IE: jun}
 	dev2 := employee.EmpBehabior{IE: mid}
+	dev3 := employee.EmpBehabior{IE: senior}
 
-	dev.DisplayInfo()
 	dev1.DisplayInfo()
 	dev2.DisplayInfo()
+	dev3.DisplayInfo()
 
 }

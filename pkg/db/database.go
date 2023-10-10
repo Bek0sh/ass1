@@ -5,6 +5,8 @@ import (
 	"fmt"
 	"log"
 
+	_ "github.com/lib/pq"
+
 	"github.com/Bek0sh/soft-ass1/pkg/db/idb"
 	"github.com/Bek0sh/soft-ass1/pkg/employee"
 )
@@ -38,6 +40,7 @@ func (p *Postgres) Connect() {
 		log.Fatal(err)
 	}
 	data = db
+	log.Print("conn success")
 }
 
 func (c *Cache) Connect() {
