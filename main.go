@@ -35,13 +35,17 @@ func init() {
 func main() {
 
 	jun := &employee.Junior{
-		Helper: &employee.Employee{},
+		Helper: &employee.Junior{
+			Helper: &employee.Employee{},
+		},
 	}
+
 	mid := &employee.Middle{
 		Helper: &employee.Junior{
 			Helper: &employee.Employee{},
 		},
 	}
+	
 	senior := &employee.Senior{
 		Helper: &employee.Middle{
 			Helper: &employee.Junior{
@@ -49,6 +53,7 @@ func main() {
 			},
 		},
 	}
+
 	dev1 := employee.EmpDecorater{IE: jun}
 	dev2 := employee.EmpDecorater{IE: mid}
 	dev3 := employee.EmpDecorater{IE: senior}

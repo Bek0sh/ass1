@@ -10,6 +10,6 @@ type EmpDecorater struct {
 	IE IEmp
 }
 
-func (empB *EmpBehabior) DisplayInfo() {
+func (empB *EmpDecorater) DisplayInfo() {
 	empB.IE.Info()
 }
